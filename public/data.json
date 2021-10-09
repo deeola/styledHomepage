@@ -1,5 +1,32 @@
-{
-  "img": "as",
-  "h1": "aaaa",
-  "p": "Hello WOrld"
-}
+[
+  {
+    "img": [
+      {
+        "mobile": "hdshjka",
+        "desktop": "jsjkfdljksdl"
+      }
+    ],
+    "title": "Hello",
+    "paragraph": "jhesjs"
+  },
+  {
+    "img": [
+      {
+        "mobile": "hdshjka",
+        "desktop": "jsjkfdljksdl"
+      }
+    ],
+    "title": "fdjkf",
+    "paragraph": "jhesjs"
+  },
+  {
+    "img": [
+      {
+        "mobile": "hdshjka",
+        "desktop": "jsjkfdljksdl"
+      }
+    ],
+    "title": "fdjkf",
+    "paragraph": "jhesjs"
+  }
+]

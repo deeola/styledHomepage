@@ -12,7 +12,7 @@ import { HeaderData } from "./HeaderData";
 
 const Header = () => {
   let [backgroundChange, setBackgroundChange] = useState(0);
-  let [loading, setLoading] = useState(true);
+  let [isLoading, setisLoading] = useState(false);
   const [bgData, setbgData] = useState([]);
 
   //fetch json data
@@ -36,18 +36,23 @@ const Header = () => {
   };
 
   const fecthData = async () => {
+    setisLoading(true);
     const res = await fetch("./data.json");
-
     const data = await res.json();
-
     setbgData(data);
+    setisLoading(false);
   };
 
   useEffect(() => {
+    setisLoading(true);
     fecthData();
+    setisLoading(false);
   }, []);
 
-  console.log(bgData);
+  if (bgData.length !== 0) {
+    console.log(bgData);
+  }
+
   return (
     <HeaderStyled>
       <HeaderLeft>
@@ -70,7 +75,7 @@ const Header = () => {
         </NavStyled>
       </HeaderLeft>
       <HeaderRight>
-        <h1>Discover innovative ways to decorate</h1>
+        <h1>{!isLoading && bgData[0].title}</h1>
         <p>
           We Provide unmatched quality, comfort, and style for property owners
           across the country. Our experts combinee form and function in bringing
