@@ -15,43 +15,45 @@ const Header = () => {
   let [isLoading, setisLoading] = useState(false);
   const [bgData, setbgData] = useState([]);
 
+  useEffect(() => {
+    fecthData();
+  }, []);
+
   //fetch json data
 
-  const previous = () => {
-    if (backgroundChange < 3) {
-      setBackgroundChange(backgroundChange++);
-    } else {
-      setBackgroundChange(0);
-    }
+  let [index, setIndex] = useState(1);
 
-    console.log(backgroundChange);
+  //Next Image Function
+  const next = () => {
+    console.log(index);
+    if (bgData.length !== undefined) {
+      if (index < bgData.length - 1) {
+        setIndex(index++);
+      } else {
+        setIndex(0);
+      }
+    }
   };
 
-  const next = () => {
-    if (backgroundChange <= 0) {
-      setBackgroundChange(backgroundChange--);
-    } else {
-      setBackgroundChange(3);
+  const previous = () => {
+    console.log(`index before: ${index}`);
+    if (bgData.length !== 0) {
+      if (index <= 0) {
+        setIndex(bgData.length - 1);
+      } else {
+        setIndex(index--);
+      }
     }
+    console.log(`index after: ${index}`);
   };
 
   const fecthData = async () => {
-    setisLoading(true);
+    setisLoading(!isLoading);
     const res = await fetch("./data.json");
     const data = await res.json();
     setbgData(data);
-    setisLoading(false);
+    setisLoading(!isLoading);
   };
-
-  useEffect(() => {
-    setisLoading(true);
-    fecthData();
-    setisLoading(false);
-  }, []);
-
-  if (bgData.length !== 0) {
-    console.log(bgData);
-  }
 
   return (
     <HeaderStyled>
@@ -75,7 +77,7 @@ const Header = () => {
         </NavStyled>
       </HeaderLeft>
       <HeaderRight>
-        <h1>{!isLoading && bgData[0].title}</h1>
+        <h1>hello</h1>
         <p>
           We Provide unmatched quality, comfort, and style for property owners
           across the country. Our experts combinee form and function in bringing
@@ -84,8 +86,8 @@ const Header = () => {
           love.
         </p>
         <div>
-          <button onClick={() => previous()}>+</button>
-          <button onClick={() => next()}>-</button>
+          <button onClick={previous}>previous</button>
+          <button onClick={next}>next</button>
         </div>
       </HeaderRight>
     </HeaderStyled>
